@@ -14,7 +14,7 @@
 
   - name: Check server status
 #    when: check_to_host ==  inventory_hostname
-    include: tasks/register_test_result.yaml
+    ansible.builtin.include_tasks: tasks/register_test_result.yaml
     vars:
       test_result_string: "{{item}}"
     with_items: "{{test_reuslts.stdout_lines}}"

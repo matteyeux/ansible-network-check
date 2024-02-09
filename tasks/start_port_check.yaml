@@ -3,7 +3,7 @@
       var: port_definition
 
   - name: start to as server
-    include: "start_to_servers.yaml"
+    ansible.builtin.include_tasks: "start_to_servers.yaml"
     vars:
       check_to_host: "{{item_to_host}}"
     with_items: "{{groups[port_definition['to_group']]}}"

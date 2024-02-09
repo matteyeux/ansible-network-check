@@ -1,6 +1,6 @@
 - name: Ansible Network Acceessibility Check
-  hosts: localhost
-  ignore_errors: true
+  hosts: all
+  #ignore_errors: true
   vars_files:
   - port_definition.yaml
   tasks:
@@ -9,9 +9,9 @@
       var: port_definitions
 
   - name: Defining fact initialization
-    include: "tasks/init_phases.yaml"
+    ansible.builtin.include_tasks: "tasks/init_phases.yaml"
     vars:
-      port_definition: "{{item_port}}"
+      port_definition: "{{ item_port }}"
     with_items: "{{ port_definitions }}"
     loop_control:
       loop_var: item_port
@@ -19,7 +19,7 @@
 
 
   - name: Testing Ports
-    include: "tasks/start_port_check.yaml"
+    ansible.builtin.include_tasks: "tasks/start_port_check.yaml"
     vars:
      port_definition: "{{item_port}}"
     with_items: "{{port_definitions}}"

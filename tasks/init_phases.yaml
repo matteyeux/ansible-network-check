@@ -3,7 +3,7 @@
       var: port_definition
 
   - name: looping to servers
-    include: "loop_phase_to_server.yaml"
+    ansible.builtin.include_tasks: "loop_phase_to_server.yaml"
     vars:
       check_to_host: "{{item_to_host}}"
     with_items: "{{groups[port_definition['to_group']]}}"
